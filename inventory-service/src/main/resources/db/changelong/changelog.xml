@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="1" author="Harinda">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="t_inventory"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="t_inventory">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sku_code" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="ins-1" author="liquibase-docs">
+        <insert tableName="t_inventory">
+            <column name="sku_code" value="dell_5559" />
+            <column name="quantity" value="100" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="ins-2" author="liquibase-docs">
+        <insert tableName="t_inventory">
+            <column name="sku_code" value="dell_5559_pro" />
+            <column name="quantity" value="0" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>
